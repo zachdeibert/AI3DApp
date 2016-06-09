@@ -68,7 +68,6 @@ var Client = function(id, width, height) {
     }
     
     this.request = function(dx, dy, dz) {
-        console.log(dz);
         var response = [];
         color = color.hue(0.05, true);
         var time = new Date().getTime();
