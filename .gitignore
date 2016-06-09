@@ -24,3 +24,6 @@ build/
 
 # Node.JS
 node_modules/
+
+# Android Studio
+.idea/
