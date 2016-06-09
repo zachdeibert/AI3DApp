@@ -12,18 +12,6 @@ function createArray(length, valueSelector) {
     return array;
 }
 
-/*
-function createPixel(x, y, r, g, b) {
-    return [
-        x + 1,
-        y + 1,
-        r * 255,
-        g * 255,
-        b * 255
-    ];
-}
-*/
-
 function createPixel(x, y, color) {
     return [
         x + 1,
@@ -37,26 +25,40 @@ function createPixel(x, y, color) {
 var Client = function(id, width, height) {
     var depthBuffer = createArray(width, function() {
         return createArray(height, function() {
-            return Number.MAX_SAFE_INTEGER;
+            return Number.MIN_SAFE_INTEGER;
         });
     });
     var color = new onecolor.HSV(1, 1, 1, 1);
     this.id = id;
+
+    function drawPixel(pixels, x, y, z, color) {
+        if ( x >= 0 && x < width && y >= 0 && y < height && depthBuffer[x][y] <= z ) {
+            depthBuffer[x][y] = z;
+            pixels.push(createPixel(x, y, color));
+        }
+    }
+
+    function drawSphere(pixels, x, y, z, r, color) {
+        var r2 = r * r;
+        var rFactor = r / 0.7;
+        for ( var i = -r; i < r; ++i ) {
+            var rx = x + i;
+            var r2minusi2 = r2 - i * i;
+            var limJ = Math.sqrt(r2minusi2);
+            for ( var j = -limJ; j < limJ; ++j ) {
+                var ry = y + j;
+                var limK = Math.sqrt(r2minusi2 - j * j);
+                var rz = z + limK;
+                var v = limK / rFactor + 0.3;
+                drawPixel(pixels, Math.round(rx), Math.round(ry), Math.round(rz), color.value(Number.isNaN(v) ? 0 : v));
+            }
+        }
+    }
     
     this.request = function(dx, dy, dz) {
         var response = [];
         color = color.hue(0.05, true);
-        /*
-        response.push(createPixel(0, 0, 1, 0, 0));
-        response.push(createPixel(width - 1, 0, 0, 1, 0));
-        response.push(createPixel(width - 1, height - 1, 0, 0, 1));
-        response.push(createPixel(0, height - 1, 0, 1, 1, 0));
-        */
-        for ( var x = width / 2 - 10; x < width / 2 + 10; ++x ) {
-            for ( var y = height / 2 - 10; y < height / 2 + 10; ++y ) {
-                response.push(createPixel(x, y, color));
-            }
-        }
+        drawSphere(response, width / 2, height / 2, 0, 20, color);
         return response;
     };
 };
