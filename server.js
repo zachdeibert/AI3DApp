@@ -69,10 +69,10 @@ var Client = function(id, width, height) {
     
     this.request = function(dx, dy, dz) {
         var response = [];
-        color = color.hue(0.05, true);
         var time = new Date().getTime();
         var dt = (time - lastTime) / 1000;
         lastTime = time;
+        color = color.hue(0.05 * dt, true);
         x += dx * dt;
         y += dy * dt;
         z += dz * dt;
