@@ -201,38 +201,11 @@
                       </block>
                     </value>
                     <statement name="DO">
-                      <block type="component_method" id="681" inline="false">
-                        <mutation component_type="Canvas" method_name="SetBackgroundPixelColor" is_generic="false" instance_name="Graphics"></mutation>
+                      <block type="component_set_get" id="1241" inline="false">
+                        <mutation component_type="Canvas" set_or_get="set" property_name="PaintColor" is_generic="false" instance_name="Graphics"></mutation>
                         <field name="COMPONENT_SELECTOR">Graphics</field>
-                        <value name="ARG0">
-                          <block type="lists_select_item" id="705" inline="false">
-                            <value name="LIST">
-                              <block type="lexical_variable_get" id="729">
-                                <field name="VAR">pixel</field>
-                              </block>
-                            </value>
-                            <value name="NUM">
-                              <block type="math_number" id="731">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="ARG1">
-                          <block type="lists_select_item" id="732" inline="false">
-                            <value name="LIST">
-                              <block type="lexical_variable_get" id="733">
-                                <field name="VAR">pixel</field>
-                              </block>
-                            </value>
-                            <value name="NUM">
-                              <block type="math_number" id="734">
-                                <field name="NUM">2</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="ARG2">
+                        <field name="PROP">PaintColor</field>
+                        <value name="VALUE">
                           <block type="color_make_color" id="775" inline="false">
                             <value name="COLORLIST">
                               <block type="lists_create_with" id="776" inline="false">
@@ -283,6 +256,40 @@
                             </value>
                           </block>
                         </value>
+                        <next>
+                          <block type="component_method" id="1280" inline="false">
+                            <mutation component_type="Canvas" method_name="DrawPoint" is_generic="false" instance_name="Graphics"></mutation>
+                            <field name="COMPONENT_SELECTOR">Graphics</field>
+                            <value name="ARG0">
+                              <block type="lists_select_item" id="705" inline="false">
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="729">
+                                    <field name="VAR">pixel</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="math_number" id="731">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ARG1">
+                              <block type="lists_select_item" id="732" inline="false">
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="733">
+                                    <field name="VAR">pixel</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="math_number" id="734">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
                       </block>
                     </statement>
                   </block>
