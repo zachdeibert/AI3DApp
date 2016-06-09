@@ -1,0 +1,23 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="component_event" id="34" x="-201" y="-96">
+    <mutation component_type="Button" instance_name="ConnectBtn" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">ConnectBtn</field>
+    <statement name="DO">
+      <block type="controls_openAnotherScreenWithStartValue" id="53" inline="false">
+        <value name="SCREENNAME">
+          <block type="text" id="54">
+            <field name="TEXT">Rendering</field>
+          </block>
+        </value>
+        <value name="STARTVALUE">
+          <block type="component_set_get" id="84">
+            <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="URLBox"></mutation>
+            <field name="COMPONENT_SELECTOR">URLBox</field>
+            <field name="PROP">Text</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="150" language-version="20"></yacodeblocks>
+</xml>
