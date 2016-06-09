@@ -21,3 +21,6 @@ bin/
 .gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
+
+# Node.JS
+node_modules/
