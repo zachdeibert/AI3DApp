@@ -44,8 +44,10 @@
                   </block>
                 </value>
                 <value name="ADD2">
-                  <block type="math_number" id="870">
-                    <field name="NUM">0</field>
+                  <block type="component_set_get" id="1013">
+                    <mutation component_type="AccelerometerSensor" set_or_get="get" property_name="ZAccel" is_generic="false" instance_name="Accelerometer"></mutation>
+                    <field name="COMPONENT_SELECTOR">Accelerometer</field>
+                    <field name="PROP">ZAccel</field>
                   </block>
                 </value>
               </block>

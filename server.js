@@ -22,6 +22,14 @@ function createPixel(x, y, color) {
     ];
 }
 
+function size(z) {
+    var size = 15 + z * 0.1;
+    if ( size < 1 ) {
+        size = 1;
+    }
+    return size;
+}
+
 var Client = function(id, width, height) {
     var depthBuffer = createArray(width, function() {
         return createArray(height, function() {
@@ -31,6 +39,7 @@ var Client = function(id, width, height) {
     var color = new onecolor.HSV(1, 1, 1, 1);
     var x = width / 2;
     var y = height / 2;
+    var z = 0;
     this.id = id;
 
     function drawPixel(pixels, x, y, z, color) {
@@ -62,7 +71,8 @@ var Client = function(id, width, height) {
         color = color.hue(0.05, true);
         x += dx;
         y += dy;
-        drawSphere(response, x, y, 0, 20, color);
+        z += dz;
+        drawSphere(response, x, y, z, size(z), color);
         return response;
     };
 };
