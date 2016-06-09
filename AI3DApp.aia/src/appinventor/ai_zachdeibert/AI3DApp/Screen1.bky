@@ -1,19 +1,86 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="component_event" id="34" x="-201" y="-96">
+  <block type="component_event" id="34" x="-189" y="-162">
     <mutation component_type="Button" instance_name="ConnectBtn" event_name="Click"></mutation>
     <field name="COMPONENT_SELECTOR">ConnectBtn</field>
     <statement name="DO">
-      <block type="controls_openAnotherScreenWithStartValue" id="53" inline="false">
-        <value name="SCREENNAME">
-          <block type="text" id="54">
-            <field name="TEXT">Rendering</field>
+      <block type="component_method" id="212" inline="false">
+        <mutation component_type="TinyDB" method_name="StoreValue" is_generic="false" instance_name="Preferences"></mutation>
+        <field name="COMPONENT_SELECTOR">Preferences</field>
+        <value name="ARG0">
+          <block type="text" id="213">
+            <field name="TEXT">url</field>
           </block>
         </value>
-        <value name="STARTVALUE">
-          <block type="component_set_get" id="84">
+        <value name="ARG1">
+          <block type="component_set_get" id="214">
             <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="URLBox"></mutation>
             <field name="COMPONENT_SELECTOR">URLBox</field>
             <field name="PROP">Text</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_openAnotherScreenWithStartValue" id="53" inline="false">
+            <value name="SCREENNAME">
+              <block type="text" id="54">
+                <field name="TEXT">Rendering</field>
+              </block>
+            </value>
+            <value name="STARTVALUE">
+              <block type="component_set_get" id="84">
+                <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="URLBox"></mutation>
+                <field name="COMPONENT_SELECTOR">URLBox</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="125" x="-195" y="25">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="163">
+        <mutation name="init"></mutation>
+        <field name="PROCNAME">init</field>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="159" x="46" y="25">
+    <mutation component_type="Form" instance_name="Screen1" event_name="OtherScreenClosed"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="164">
+        <mutation name="init"></mutation>
+        <field name="PROCNAME">init</field>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="162" x="-188" y="122">
+    <mutation></mutation>
+    <field name="NAME">init</field>
+    <statement name="STACK">
+      <block type="component_set_get" id="194" inline="false">
+        <mutation component_type="TextBox" set_or_get="set" property_name="Text" is_generic="false" instance_name="URLBox"></mutation>
+        <field name="COMPONENT_SELECTOR">URLBox</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="component_method" id="202" inline="false">
+            <mutation component_type="TinyDB" method_name="GetValue" is_generic="false" instance_name="Preferences"></mutation>
+            <field name="COMPONENT_SELECTOR">Preferences</field>
+            <value name="ARG0">
+              <block type="text" id="203">
+                <field name="TEXT">url</field>
+              </block>
+            </value>
+            <value name="ARG1">
+              <block type="component_set_get" id="204">
+                <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="URLBox"></mutation>
+                <field name="COMPONENT_SELECTOR">URLBox</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
           </block>
         </value>
       </block>
