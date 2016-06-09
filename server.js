@@ -29,6 +29,8 @@ var Client = function(id, width, height) {
         });
     });
     var color = new onecolor.HSV(1, 1, 1, 1);
+    var x = width / 2;
+    var y = height / 2;
     this.id = id;
 
     function drawPixel(pixels, x, y, z, color) {
@@ -58,7 +60,9 @@ var Client = function(id, width, height) {
     this.request = function(dx, dy, dz) {
         var response = [];
         color = color.hue(0.05, true);
-        drawSphere(response, width / 2, height / 2, 0, 20, color);
+        x += dx;
+        y += dy;
+        drawSphere(response, x, y, 0, 20, color);
         return response;
     };
 };

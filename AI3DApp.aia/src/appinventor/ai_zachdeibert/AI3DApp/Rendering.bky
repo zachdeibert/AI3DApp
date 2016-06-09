@@ -20,13 +20,27 @@
               <block type="lists_create_with" id="862" inline="false">
                 <mutation items="3"></mutation>
                 <value name="ADD0">
-                  <block type="math_number" id="868">
-                    <field name="NUM">0</field>
+                  <block type="math_single" id="998" inline="false">
+                    <field name="OP">NEG</field>
+                    <value name="NUM">
+                      <block type="component_set_get" id="997">
+                        <mutation component_type="OrientationSensor" set_or_get="get" property_name="Roll" is_generic="false" instance_name="Orientation"></mutation>
+                        <field name="COMPONENT_SELECTOR">Orientation</field>
+                        <field name="PROP">Roll</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
                 <value name="ADD1">
-                  <block type="math_number" id="869">
-                    <field name="NUM">0</field>
+                  <block type="math_single" id="999" inline="false">
+                    <field name="OP">NEG</field>
+                    <value name="NUM">
+                      <block type="component_set_get" id="986">
+                        <mutation component_type="OrientationSensor" set_or_get="get" property_name="Pitch" is_generic="false" instance_name="Orientation"></mutation>
+                        <field name="COMPONENT_SELECTOR">Orientation</field>
+                        <field name="PROP">Pitch</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
                 <value name="ADD2">
