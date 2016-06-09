@@ -34,6 +34,11 @@ var Client = function(id, width, height) {
         response.push(createPixel(width - 1, 0, 0, 1, 0));
         response.push(createPixel(width - 1, height - 1, 0, 0, 1));
         response.push(createPixel(0, height - 1, 0, 1, 1, 0));
+        for ( var x = width / 2 - 10; x < width / 2 + 10; ++x ) {
+            for ( var y = height / 2 - 10; y < height / 2 + 10; ++y ) {
+                response.push(createPixel(x, y, 0, 1, 1));
+            }
+        }
         return response;
     };
 };
@@ -68,23 +73,37 @@ function serializeCSV(array) {
     return csv;
 }
 
+function toInt(str) {
+    return parseInt(str.replace("\"", ""));
+}
+
+function toFloat(str) {
+    return parseFloat(str.replace("\"", ""));
+}
+
 var server = http.createServer(function(req, res) {
+    function send(data) {
+        res.end(data);
+        console.log("> %s", data);
+    }
+    console.log("Request to %s", req.url);
     req.on("data", function(chunk) {
         var str = chunk.toString();
+        console.log("< %s", str);
         var args = str.split(",");
         if ( req.url == "/login" && args.length == 2 ) {
             var token = randomToken();
-            clients[token] = new Client(token, parseInt(args[0]), parseInt(args[1]));
-            res.end(token);
+            clients[token] = new Client(token, toInt(args[0]), toInt(args[1]));
+            send(token);
         } else if ( fullRegex(req.url, /\/frame\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/) && args.length == 3 ) {
             var token = req.url.substr(7);
             if ( clients.hasOwnProperty(token) ) {
-                res.end(serializeCSV(clients[token].request(parseFloat(args[0]), parseFloat(args[1]), parseFloat(args[2]))));
+                send(serializeCSV(clients[token].request(toFloat(args[0]), toFloat(args[1]), toFloat(args[2]))));
             } else {
-                res.end("Invalid token");
+                send("Invalid token");
             }
         } else {
-            res.end("Invalid protocol");
+            send("Invalid protocol");
         }
     });
 });
