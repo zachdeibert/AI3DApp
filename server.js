@@ -40,6 +40,7 @@ var Client = function(id, width, height) {
     var x = width / 2;
     var y = height / 2;
     var z = 0;
+    var lastTime = new Date().getTime();
     this.id = id;
 
     function drawPixel(pixels, x, y, z, color) {
@@ -69,9 +70,12 @@ var Client = function(id, width, height) {
     this.request = function(dx, dy, dz) {
         var response = [];
         color = color.hue(0.05, true);
-        x += dx;
-        y += dy;
-        z += dz;
+        var time = new Date().getTime();
+        var dt = (time - lastTime) / 1000;
+        lastTime = time;
+        x += dx * dt;
+        y += dy * dt;
+        z += dz * dt;
         drawSphere(response, x, y, z, size(z), color);
         return response;
     };
