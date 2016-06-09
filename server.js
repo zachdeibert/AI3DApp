@@ -77,6 +77,16 @@ var Client = function(id, width, height) {
         x += dx * dt;
         y += dy * dt;
         z += dz * dt;
+        if ( x < 0 ) {
+            x = 0;
+        } else if ( x >= width ) {
+            x = width - 1;
+        }
+        if ( y < 0 ) {
+            y = 0;
+        } else if ( y >= height ) {
+            y = height - 1;
+        }
         drawSphere(response, x, y, z, size(z), color);
         return response;
     };
