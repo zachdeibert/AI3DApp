@@ -26,6 +26,7 @@ public class Main extends JFrame implements KeyListener {
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	private boolean firstFrame;
 
 	private String request(String endpoint, Object... args) {
 		StringBuilder body = new StringBuilder();
@@ -60,9 +61,14 @@ public class Main extends JFrame implements KeyListener {
 
 	@Override
 	public void paint(Graphics g) {
-		int dx = (right ? 1 : 0) - (left ? 1 : 0);
-		int dy = (backward ? 1 : 0) - (forward ? 1 : 0);
-		int dz = (up ? 1 : 0) - (down ? 1 : 0);
+		if ( firstFrame ) {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			firstFrame = false;
+		}
+		int dx = (right ? 100 : 0) - (left ? 100 : 0);
+		int dy = (backward ? 100 : 0) - (forward ? 100 : 0);
+		int dz = (up ? 100 : 0) - (down ? 100 : 0);
 		String resp = request("/frame/".concat(guid), dx, dy, dz);
 		String[] pixels = resp.split("\n");
 		for ( String pixel : pixels ) {
@@ -70,6 +76,12 @@ public class Main extends JFrame implements KeyListener {
 			drawPixel(g, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]),
 					Integer.parseInt(parts[3]), Integer.parseInt(parts[4]));
 		}
+		repaint();
+	}
+	
+	@Override
+	public void paintAll(Graphics g) {
+		paint(g);
 	}
 
 	public void key(KeyEvent e, boolean value) {
@@ -120,5 +132,8 @@ public class Main extends JFrame implements KeyListener {
 		setSize(640, 480);
 		url = JOptionPane.showInputDialog(this, "Please enter server IP", "http://localhost:8080");
 		guid = request("/login", getWidth(), getHeight());
+		firstFrame = true;
+		addKeyListener(this);
+		repaint();
 	}
 }

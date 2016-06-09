@@ -14,11 +14,11 @@ function createArray(length, valueSelector) {
 
 function createPixel(x, y, color) {
     return [
-        x + 1,
-        y + 1,
-        color.red() * 255,
-        color.green() * 255,
-        color.blue() * 255
+        Math.round(x + 1),
+        Math.round(y + 1),
+        Math.round(color.red() * 255),
+        Math.round(color.green() * 255),
+        Math.round(color.blue() * 255)
     ];
 }
 
@@ -69,13 +69,23 @@ var Client = function(id, width, height) {
     
     this.request = function(dx, dy, dz) {
         var response = [];
-        color = color.hue(0.05, true);
         var time = new Date().getTime();
         var dt = (time - lastTime) / 1000;
         lastTime = time;
+        color = color.hue(0.05 * dt, true);
         x += dx * dt;
         y += dy * dt;
         z += dz * dt;
+        if ( x < 0 ) {
+            x = 0;
+        } else if ( x >= width ) {
+            x = width - 1;
+        }
+        if ( y < 0 ) {
+            y = 0;
+        } else if ( y >= height ) {
+            y = height - 1;
+        }
         drawSphere(response, x, y, z, size(z), color);
         return response;
     };

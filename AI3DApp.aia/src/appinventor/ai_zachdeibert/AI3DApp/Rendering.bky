@@ -1,13 +1,5 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="global_declaration" id="392" inline="false" x="-61" y="-52">
-    <field name="NAME">loggedIn</field>
-    <value name="VALUE">
-      <block type="logic_boolean" id="397">
-        <field name="BOOL">FALSE</field>
-      </block>
-    </value>
-  </block>
-  <block type="procedures_defnoreturn" id="791" x="429" y="-50">
+  <block type="procedures_defnoreturn" id="791" x="424" y="-84">
     <mutation></mutation>
     <field name="NAME">sendRequest</field>
     <statement name="STACK">
@@ -44,18 +36,44 @@
                   </block>
                 </value>
                 <value name="ADD2">
-                  <block type="component_set_get" id="1013">
-                    <mutation component_type="AccelerometerSensor" set_or_get="get" property_name="ZAccel" is_generic="false" instance_name="Accelerometer"></mutation>
-                    <field name="COMPONENT_SELECTOR">Accelerometer</field>
-                    <field name="PROP">ZAccel</field>
+                  <block type="math_multiply" id="1117" inline="true">
+                    <mutation items="2"></mutation>
+                    <value name="NUM0">
+                      <block type="lexical_variable_get" id="1110">
+                        <field name="VAR">global dz</field>
+                      </block>
+                    </value>
+                    <value name="NUM1">
+                      <block type="math_number" id="1118">
+                        <field name="NUM">-10</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
               </block>
             </value>
           </block>
         </value>
+        <next>
+          <block type="lexical_variable_set" id="1115" inline="false">
+            <field name="VAR">global dz</field>
+            <value name="VALUE">
+              <block type="math_number" id="1116">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
       </block>
     </statement>
+  </block>
+  <block type="global_declaration" id="392" inline="false" x="-61" y="-52">
+    <field name="NAME">loggedIn</field>
+    <value name="VALUE">
+      <block type="logic_boolean" id="397">
+        <field name="BOOL">FALSE</field>
+      </block>
+    </value>
   </block>
   <block type="component_event" id="93" x="-61" y="-1">
     <mutation component_type="Form" instance_name="Rendering" event_name="Initialize"></mutation>
@@ -136,6 +154,14 @@
       </block>
     </statement>
   </block>
+  <block type="global_declaration" id="1108" inline="false" x="1078" y="90">
+    <field name="NAME">dz</field>
+    <value name="VALUE">
+      <block type="math_number" id="1109">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
   <block type="component_event" id="121" x="-61" y="191">
     <mutation component_type="Web" instance_name="Server" event_name="GotText"></mutation>
     <field name="COMPONENT_SELECTOR">Server</field>
@@ -175,38 +201,11 @@
                       </block>
                     </value>
                     <statement name="DO">
-                      <block type="component_method" id="681" inline="false">
-                        <mutation component_type="Canvas" method_name="SetBackgroundPixelColor" is_generic="false" instance_name="Graphics"></mutation>
+                      <block type="component_set_get" id="1241" inline="false">
+                        <mutation component_type="Canvas" set_or_get="set" property_name="PaintColor" is_generic="false" instance_name="Graphics"></mutation>
                         <field name="COMPONENT_SELECTOR">Graphics</field>
-                        <value name="ARG0">
-                          <block type="lists_select_item" id="705" inline="false">
-                            <value name="LIST">
-                              <block type="lexical_variable_get" id="729">
-                                <field name="VAR">pixel</field>
-                              </block>
-                            </value>
-                            <value name="NUM">
-                              <block type="math_number" id="731">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="ARG1">
-                          <block type="lists_select_item" id="732" inline="false">
-                            <value name="LIST">
-                              <block type="lexical_variable_get" id="733">
-                                <field name="VAR">pixel</field>
-                              </block>
-                            </value>
-                            <value name="NUM">
-                              <block type="math_number" id="734">
-                                <field name="NUM">2</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="ARG2">
+                        <field name="PROP">PaintColor</field>
+                        <value name="VALUE">
                           <block type="color_make_color" id="775" inline="false">
                             <value name="COLORLIST">
                               <block type="lists_create_with" id="776" inline="false">
@@ -257,6 +256,40 @@
                             </value>
                           </block>
                         </value>
+                        <next>
+                          <block type="component_method" id="1280" inline="false">
+                            <mutation component_type="Canvas" method_name="DrawPoint" is_generic="false" instance_name="Graphics"></mutation>
+                            <field name="COMPONENT_SELECTOR">Graphics</field>
+                            <value name="ARG0">
+                              <block type="lists_select_item" id="705" inline="false">
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="729">
+                                    <field name="VAR">pixel</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="math_number" id="731">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ARG1">
+                              <block type="lists_select_item" id="732" inline="false">
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="733">
+                                    <field name="VAR">pixel</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="math_number" id="734">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
                       </block>
                     </statement>
                   </block>
@@ -313,6 +346,23 @@
         <field name="BOOL">TRUE</field>
       </block>
     </value>
+  </block>
+  <block type="component_event" id="1102" x="653" y="239">
+    <mutation component_type="Canvas" instance_name="Graphics" event_name="Flung"></mutation>
+    <field name="COMPONENT_SELECTOR">Graphics</field>
+    <statement name="DO">
+      <block type="lexical_variable_set" id="1111" inline="false">
+        <field name="VAR">global dz</field>
+        <value name="VALUE">
+          <block type="lexical_variable_get" id="1114">
+            <mutation>
+              <eventparam name="yvel"></eventparam>
+            </mutation>
+            <field name="VAR">yvel</field>
+          </block>
+        </value>
+      </block>
+    </statement>
   </block>
   <yacodeblocks ya-version="150" language-version="20"></yacodeblocks>
 </xml>
