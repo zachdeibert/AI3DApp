@@ -1,6 +1,8 @@
 var http = require("http");
 var guid = require("guid");
+var onecolor = require("onecolor");
 var port = 8080;
+var log = true;
 
 function createArray(length, valueSelector) {
     var array = [];
@@ -10,6 +12,7 @@ function createArray(length, valueSelector) {
     return array;
 }
 
+/*
 function createPixel(x, y, r, g, b) {
     return [
         x + 1,
@@ -19,6 +22,17 @@ function createPixel(x, y, r, g, b) {
         b * 255
     ];
 }
+*/
+
+function createPixel(x, y, color) {
+    return [
+        x + 1,
+        y + 1,
+        color.red() * 255,
+        color.green() * 255,
+        color.blue() * 255
+    ];
+}
 
 var Client = function(id, width, height) {
     var depthBuffer = createArray(width, function() {
@@ -26,17 +40,21 @@ var Client = function(id, width, height) {
             return Number.MAX_SAFE_INTEGER;
         });
     });
+    var color = new onecolor.HSV(1, 1, 1, 1);
     this.id = id;
     
     this.request = function(dx, dy, dz) {
         var response = [];
+        color = color.hue(0.05, true);
+        /*
         response.push(createPixel(0, 0, 1, 0, 0));
         response.push(createPixel(width - 1, 0, 0, 1, 0));
         response.push(createPixel(width - 1, height - 1, 0, 0, 1));
         response.push(createPixel(0, height - 1, 0, 1, 1, 0));
+        */
         for ( var x = width / 2 - 10; x < width / 2 + 10; ++x ) {
             for ( var y = height / 2 - 10; y < height / 2 + 10; ++y ) {
-                response.push(createPixel(x, y, 0, 1, 1));
+                response.push(createPixel(x, y, color));
             }
         }
         return response;
@@ -84,12 +102,18 @@ function toFloat(str) {
 var server = http.createServer(function(req, res) {
     function send(data) {
         res.end(data);
-        console.log("> %s", data);
+        if ( log ) {
+            console.log("> %s", data);
+        }
     }
-    console.log("Request to %s", req.url);
+    if ( log ) {
+        console.log("Request to %s", req.url);
+    }
     req.on("data", function(chunk) {
         var str = chunk.toString();
-        console.log("< %s", str);
+        if ( log ) {
+            console.log("< %s", str);
+        }
         var args = str.split(",");
         if ( req.url == "/login" && args.length == 2 ) {
             var token = randomToken();
