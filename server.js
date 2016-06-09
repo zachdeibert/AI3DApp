@@ -14,11 +14,11 @@ function createArray(length, valueSelector) {
 
 function createPixel(x, y, color) {
     return [
-        x + 1,
-        y + 1,
-        color.red() * 255,
-        color.green() * 255,
-        color.blue() * 255
+        Math.round(x + 1),
+        Math.round(y + 1),
+        Math.round(color.red() * 255),
+        Math.round(color.green() * 255),
+        Math.round(color.blue() * 255)
     ];
 }
 
