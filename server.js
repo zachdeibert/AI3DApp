@@ -2,7 +2,7 @@ var http = require("http");
 var guid = require("guid");
 var onecolor = require("onecolor");
 var port = 8080;
-var log = true;
+var log = false;
 
 function createArray(length, valueSelector) {
     var array = [];
