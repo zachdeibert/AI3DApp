@@ -73,12 +73,14 @@ public class Main extends JFrame implements KeyListener {
 		String[] pixels = resp.split("\n");
 		for ( String pixel : pixels ) {
 			String[] parts = pixel.split(",");
-			drawPixel(g, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]),
-					Integer.parseInt(parts[3]), Integer.parseInt(parts[4]));
+			if ( parts[0].length() > 0 ) {
+				drawPixel(g, Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]),
+						Integer.parseInt(parts[3]), Integer.parseInt(parts[4]));
+			}
 		}
 		repaint();
 	}
-	
+
 	@Override
 	public void paintAll(Graphics g) {
 		paint(g);
