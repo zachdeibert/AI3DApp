@@ -16,17 +16,28 @@
         android:text="IP address of server:"
         android:id="@+id/textServerIP" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_weight="1"
-            android:layout_column="2"
-            android:text="0.0.0.0:8080" />
-
     </TableRow>
 
     <TableRow>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serverAddress"
+            android:layout_weight="1"
+            android:layout_column="0"
+            android:text="http://192.168.2.137" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <Button
             android:layout_width="wrap_content"
@@ -36,11 +47,5 @@
             android:id="@+id/connectServer"
             android:layout_gravity="bottom"
             android:layout_column="0" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     </TableRow>
 </TableLayout>
