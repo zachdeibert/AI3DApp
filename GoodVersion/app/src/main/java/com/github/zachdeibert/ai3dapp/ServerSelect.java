@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -64,14 +65,13 @@ public class ServerSelect extends AppCompatActivity {
         button_connectServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = (String) button_connectServer.getText();
+                url = ((TextView) findViewById(R.id.serverAddress)).getText().toString();
                 startActivity(new Intent(ServerSelect.this, Rendering.class));
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        Vars.guid = request("/login", this.getWindow().getAttributes().width, this.getWindow().getAttributes().height);
     }
 
     @Override
